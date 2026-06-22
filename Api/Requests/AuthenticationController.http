@@ -1,0 +1,31 @@
+@Api_HostAddress = http://localhost:5140
+@Auth = auth
+@Base_Url = {{Api_HostAddress}}/{{Auth}}
+
+###
+
+# Rejestracja - poprawne dane
+POST {{Base_Url}}/register
+Content-Type: application/json
+Accept: application/json
+
+{
+  "email": "user@example.com",
+  "password": "password",
+  "firstName": "Jan",
+  "lastName": "Kowalski"
+}
+
+###
+
+# Logowanie - poprawne dane
+POST {{Base_Url}}/login
+Content-Type: application/json
+Accept: application/json
+
+{
+  "email": "user@example.com",
+  "password": "password"
+}
+
+###

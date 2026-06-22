@@ -1,0 +1,12 @@
+@Api_HostAddress = http://localhost:5140
+@TaskItem = tasks
+@Base_Url = {{Api_HostAddress}}/{{TaskItem}}
+@Token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMTlkMDYyZS0wN2I2LTdmNjYtYTZkYi0yMTdkZmRmNzA4MDEiLCJnaXZlbl9uYW1lIjoiSmFuIiwiZmFtaWx5X25hbWUiOiJLb3dhbHNraSIsImp0aSI6Ijc2MzdjOTRlLTcyZmMtNDk0ZS04Y2ViLTliNjQ3YzUyMDY0NSIsImV4cCI6MTc3MzkyODc3NSwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo1MTQwIiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo1MTQwIn0._IrXi_gGqi1ZZvAgHN-lQAZaOnA04eDU4ckooDiTqmo
+
+###
+
+# Zadanie - szczegoly
+GET {{Base_Url}}
+Authorization: Bearer {{Token}}
+
+###
