@@ -1,3 +1,21 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿using Infrastructure;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Worker.Consumers;
 
-Console.WriteLine("Hello, World!");
+var builder = Host.CreateApplicationBuilder(new HostApplicationBuilderSettings
+{
+    Args = args,
+    ContentRootPath = AppContext.BaseDirectory
+});
+
+builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true)
+    .AddEnvironmentVariables();
+
+builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddHostedService<UserRegisteredEventConsumer>();
+
+var host = builder.Build();
+host.Run();
