@@ -1,7 +1,7 @@
 using Application.Abstractions;
+using Application.Authentication.Events;
 using Application.Authentication.Interfaces;
 using Application.Common.Exceptions;
-using Application.Common.Interfaces;
 using Application.Common.Persistence;
 using Domain.Entities;
 
@@ -10,7 +10,7 @@ namespace Application.Authentication.Commands.Register;
 public class RegisterCommandHandler(
     IUserRepository userRepository,
     IPasswordHasher passwordHasher,
-    IEmailSender emailSender,
+    IMessageBus messageBus,
     TimeProvider timeProvider) : ICommandHandler<RegisterCommand, Guid>
 {
     public async Task<Guid> Handle(RegisterCommand command, CancellationToken cancellationToken = default)
@@ -33,12 +33,7 @@ public class RegisterCommandHandler(
         
         await userRepository.AddAsync(user, cancellationToken);
         
-        // TODO in the future add this to async queue
-        await emailSender.SendEmailAsync(
-            email: user.Email, 
-            subject: "Welcome to our service!", 
-            message: $"Hello {user.FirstName}, thank you for registering!"
-            );
+        await messageBus.PublishAsync(new UserRegisteredEvent(user.Email, user.FirstName), cancellationToken);
         
         return user.Id;
     }
