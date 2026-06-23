@@ -17,7 +17,7 @@ public class EmailNotificationConsumer(
         logger.LogInformation("EmailNotificationConsumer starting...");
 
         await bus.PubSub.SubscribeAsync<UserRegisteredEvent>(
-        "worker_sms_notification",
+        "worker_email_notification",
         async (msg, ct) =>
         {
             logger.LogInformation("Received UserRegisteredEvent: {Email}", msg.Email);
