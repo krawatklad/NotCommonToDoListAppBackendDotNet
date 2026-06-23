@@ -7,17 +7,17 @@ using Microsoft.Extensions.Logging;
 
 namespace Worker.Consumers;
 
-public class UserRegisteredEventConsumer(
+public class EmailNotificationConsumer(
     IBus bus,
     IServiceProvider serviceProvider,
-    ILogger<UserRegisteredEventConsumer> logger) : BackgroundService
+    ILogger<EmailNotificationConsumer> logger) : BackgroundService
 {
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        logger.LogInformation("UserRegisteredEventConsumer starting...");
+        logger.LogInformation("EmailNotificationConsumer starting...");
 
         await bus.PubSub.SubscribeAsync<UserRegisteredEvent>(
-        "worker_user_registered",
+        "worker_sms_notification",
         async (msg, ct) =>
         {
             logger.LogInformation("Received UserRegisteredEvent: {Email}", msg.Email);

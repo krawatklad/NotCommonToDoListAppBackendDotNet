@@ -15,7 +15,8 @@ builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnC
     .AddEnvironmentVariables();
 
 builder.Services.AddInfrastructure(builder.Configuration);
-builder.Services.AddHostedService<UserRegisteredEventConsumer>();
+builder.Services.AddHostedService<EmailNotificationConsumer>();
+builder.Services.AddHostedService<SmsNotificationConsumer>();
 
 var host = builder.Build();
 host.Run();
