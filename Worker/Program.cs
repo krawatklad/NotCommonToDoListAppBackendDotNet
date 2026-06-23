@@ -1,4 +1,5 @@
-﻿using Infrastructure;
+﻿using Application;
+using Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -14,6 +15,7 @@ builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnC
     .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true)
     .AddEnvironmentVariables();
 
+builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddHostedService<EmailNotificationConsumer>();
 builder.Services.AddHostedService<SmsNotificationConsumer>();

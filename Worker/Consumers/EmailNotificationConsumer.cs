@@ -1,5 +1,5 @@
 using Application.Authentication.Events;
-using Application.Common.Interfaces;
+using Application.Authentication.Events.UserRegistered;
 using EasyNetQ;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -23,12 +23,9 @@ public class EmailNotificationConsumer(
             logger.LogInformation("Received UserRegisteredEvent: {Email}", msg.Email);
             
             await using var scope = serviceProvider.CreateAsyncScope();
-            var emailSender = scope.ServiceProvider.GetRequiredService<IEmailSender>();
+            var handler = scope.ServiceProvider.GetRequiredService<SendEmailOnUserRegisteredEventHandler>();
             
-            await emailSender.SendEmailAsync(
-                msg.Email, 
-                "Welcome to NotCommonToDoListApp!", 
-                $"Hi {msg.FirstName}, thank you for registering!");
+            await handler.HandleAsync(msg, ct);
         }, _ => {}, stoppingToken);
         
         await Task.Delay(Timeout.Infinite, stoppingToken);

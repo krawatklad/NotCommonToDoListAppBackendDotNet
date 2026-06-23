@@ -1,3 +1,3 @@
-namespace Application.Authentication.Events;
+namespace Application.Authentication.Events.UserRegistered;
 
 public record UserRegisteredEvent(string Email, string FirstName);
