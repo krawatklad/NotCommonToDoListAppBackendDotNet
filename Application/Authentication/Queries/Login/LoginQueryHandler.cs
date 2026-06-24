@@ -2,7 +2,6 @@ using Application.Abstractions;
 using Application.Authentication.DTOs;
 using Application.Authentication.Interfaces;
 using Application.Common.Exceptions;
-using Application.Common.Interfaces;
 using Application.Common.Persistence;
 
 namespace Application.Authentication.Queries.Login;

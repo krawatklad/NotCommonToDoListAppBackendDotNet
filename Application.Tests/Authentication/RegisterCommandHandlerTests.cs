@@ -1,6 +1,5 @@
 using Application.Abstractions;
 using Application.Authentication.Commands.Register;
-using Application.Authentication.Events;
 using Application.Authentication.Events.UserRegistered;
 using Application.Authentication.Interfaces;
 using Application.Common.Exceptions;

@@ -1,6 +1,7 @@
 using Domain.Entities;
 using Domain.Enums;
 using Infrastructure.TaskItems;
+using QuestPDF;
 using QuestPDF.Infrastructure;
 
 namespace Infrastructure.Tests.TaskItems;
@@ -11,7 +12,7 @@ public class TaskItemExportPdfTests
 
     public TaskItemExportPdfTests()
     {
-        QuestPDF.Settings.License = LicenseType.Community;
+        Settings.License = LicenseType.Community;
         _exporter = new TaskItemExportPdf();
     }
 

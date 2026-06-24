@@ -1,7 +1,6 @@
 using Application.Authentication.Interfaces;
 using Application.Authentication.Queries.Login;
 using Application.Common.Exceptions;
-using Application.Common.Interfaces;
 using Application.Common.Persistence;
 using Domain.Entities;
 using Moq;

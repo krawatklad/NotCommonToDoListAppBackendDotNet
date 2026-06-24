@@ -1,4 +1,3 @@
-using Application.Authentication.Events;
 using Application.Authentication.Events.UserRegistered;
 using EasyNetQ;
 using Microsoft.Extensions.DependencyInjection;

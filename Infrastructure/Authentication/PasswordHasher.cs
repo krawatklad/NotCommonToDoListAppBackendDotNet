@@ -1,5 +1,4 @@
 using Application.Authentication.Interfaces;
-using Application.Common.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using IdentityPasswordHasher = Microsoft.AspNetCore.Identity.PasswordHasher<Domain.Entities.User>;
 
