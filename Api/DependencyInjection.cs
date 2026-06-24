@@ -15,7 +15,7 @@ public static class DependencyInjection
         
         return services;
     }
-    
+
     private static IServiceCollection AddGlobalExceptionHandling(this IServiceCollection services)
     {
         services.AddProblemDetails(options =>
@@ -31,7 +31,7 @@ public static class DependencyInjection
         
         return services;
     }
-    
+
     private static IServiceCollection AddDocumentation(this IServiceCollection services)
     {
         services.AddSwaggerGen(options =>

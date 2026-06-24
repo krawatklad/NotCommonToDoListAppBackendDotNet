@@ -6,8 +6,8 @@ namespace Application.Tests.Authentication.Events;
 
 public class SendSmsOnUserRegisteredEventHandlerTests
 {
-    private readonly Mock<ILogger<SendSmsOnUserRegisteredEventHandler>> _loggerMock;
     private readonly SendSmsOnUserRegisteredEventHandler _handler;
+    private readonly Mock<ILogger<SendSmsOnUserRegisteredEventHandler>> _loggerMock;
 
     public SendSmsOnUserRegisteredEventHandlerTests()
     {

@@ -22,12 +22,12 @@ namespace Api.Tests.Controllers;
 public class TaskItemControllerTests
 {
     private readonly Mock<ICommandHandler<AddTaskItemCommand, Guid>> _addTaskItemHandlerMock;
-    private readonly Mock<ICommandHandler<UpdateTaskItemCommand, TaskItem>> _updateTaskItemHandlerMock;
+    private readonly TaskItemController _controller;
     private readonly Mock<ICommandHandler<DeleteTaskItemCommand, Unit>> _deleteTaskItemHandlerMock;
+    private readonly Mock<IQueryHandler<ExportTaskItemsQuery, ExportedTaskItemsDto>> _exportTaskItemsHandlerMock;
     private readonly Mock<IQueryHandler<FindTaskItemQuery, TaskItem?>> _findTaskItemHandlerMock;
     private readonly Mock<IQueryHandler<GetTaskItemsQuery, PaginatedList<TaskItem>>> _getTaskItemsHandlerMock;
-    private readonly Mock<IQueryHandler<ExportTaskItemsQuery, ExportedTaskItemsDto>> _exportTaskItemsHandlerMock;
-    private readonly TaskItemController _controller;
+    private readonly Mock<ICommandHandler<UpdateTaskItemCommand, TaskItem>> _updateTaskItemHandlerMock;
     private readonly Guid _userId = new("00000000-0000-0000-0000-000000000001");
 
     public TaskItemControllerTests()

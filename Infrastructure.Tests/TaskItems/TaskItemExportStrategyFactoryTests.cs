@@ -7,9 +7,9 @@ namespace Infrastructure.Tests.TaskItems;
 
 public class TaskItemExportStrategyFactoryTests
 {
-    private readonly Mock<ITaskItemExportXlsx> _xlsxMock;
-    private readonly Mock<ITaskItemExportPdf> _pdfMock;
     private readonly TaskItemExportStrategyFactory _factory;
+    private readonly Mock<ITaskItemExportPdf> _pdfMock;
+    private readonly Mock<ITaskItemExportXlsx> _xlsxMock;
 
     public TaskItemExportStrategyFactoryTests()
     {

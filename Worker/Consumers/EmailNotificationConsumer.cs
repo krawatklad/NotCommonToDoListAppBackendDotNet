@@ -1,4 +1,3 @@
-using Application.Authentication.Events;
 using Application.Authentication.Events.UserRegistered;
 using EasyNetQ;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,16 +16,16 @@ public class EmailNotificationConsumer(
         logger.LogInformation("EmailNotificationConsumer starting...");
 
         await bus.PubSub.SubscribeAsync<UserRegisteredEvent>(
-        "worker_email_notification",
-        async (msg, ct) =>
-        {
-            logger.LogInformation("Received UserRegisteredEvent: {Email}", msg.Email);
+            "worker_email_notification",
+            async (msg, ct) =>
+            {
+                logger.LogInformation("Received UserRegisteredEvent: {Email}", msg.Email);
             
-            await using var scope = serviceProvider.CreateAsyncScope();
-            var handler = scope.ServiceProvider.GetRequiredService<SendEmailOnUserRegisteredEventHandler>();
+                await using var scope = serviceProvider.CreateAsyncScope();
+                var handler = scope.ServiceProvider.GetRequiredService<SendEmailOnUserRegisteredEventHandler>();
             
-            await handler.HandleAsync(msg, ct);
-        }, _ => {}, stoppingToken);
+                await handler.HandleAsync(msg, ct);
+            }, _ => {}, stoppingToken);
         
         await Task.Delay(Timeout.Infinite, stoppingToken);
     }

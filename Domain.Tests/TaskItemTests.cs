@@ -25,7 +25,7 @@ public class TaskItemTests
         // Assert
         Assert.Equal("", taskItem.Title);
     }
-    
+
     [Fact]
     public void Title_Should_Capitalize_First_Letter()
     {
@@ -46,7 +46,7 @@ public class TaskItemTests
         // Assert
         Assert.Equal("Test task", taskItem.Title);
     }
-    
+
     [Fact]
     public void Title_Should_Remain_Unchanged_When_First_Letter_Is_Already_Uppercase()
     {

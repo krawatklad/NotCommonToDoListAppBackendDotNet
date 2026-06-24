@@ -9,6 +9,6 @@ public class User
     public required string Password { get; set; }
     public required DateTimeOffset CreatedAt { get; set; }
     public required DateTimeOffset UpdatedAt { get; set; }
-    
+
     public ICollection<TaskItem> CreatedTasks { get; set; } = new List<TaskItem>();
 }

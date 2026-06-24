@@ -1,19 +1,19 @@
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using Api.Contracts.Request;
 using Api.Contracts.Response;
 using Application.Abstractions;
-using Application.TaskItems.Commands.AddTaskItem;
-using Application.TaskItems.Queries.ExportTaskItems;
-using Application.TaskItems.Queries.FindTaskItem;
-using Application.TaskItems.Queries.GetTaskItems;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
 using Application.Common;
+using Application.TaskItems.Commands.AddTaskItem;
 using Application.TaskItems.Commands.DeleteTaskItem;
 using Application.TaskItems.Commands.UpdateTaskItem;
 using Application.TaskItems.DTOs;
+using Application.TaskItems.Queries.ExportTaskItems;
+using Application.TaskItems.Queries.FindTaskItem;
+using Application.TaskItems.Queries.GetTaskItems;
 using Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers;
 
@@ -86,7 +86,7 @@ public class TaskItemController(
 
         return File(result.Content, result.MimeType, "my_tasks");
     }
-    
+
     [HttpGet("{id:guid}")]
     public async Task<ActionResult<GetTaskItemResponse>> FindTaskItem(Guid id)
     {
@@ -111,7 +111,7 @@ public class TaskItemController(
             CreatedAt: taskItem.CreatedAt,
             UpdatedAt: taskItem.UpdatedAt));
     }
-    
+
     [HttpPost]
     public async Task<ActionResult<AddTaskItemResponse>> AddTaskItem(AddTaskItemRequest request)
     {
@@ -131,7 +131,7 @@ public class TaskItemController(
 
         return Ok(new AddTaskItemResponse(Id: taskItemId));
     }
-    
+
     [HttpPut("{id:guid}")]
     public async Task<ActionResult<TaskItemResponse>> UpdateTaskItem(Guid id, UpdateTaskItemRequest request)
     {
@@ -159,7 +159,7 @@ public class TaskItemController(
             CreatedAt: taskItem.CreatedAt,
             UpdatedAt: taskItem.UpdatedAt));
     }
-    
+
     [HttpDelete("{id:guid}")]
     public async Task<ActionResult<TaskItemResponse>> DeleteTaskItem(Guid id)
     {

@@ -16,6 +16,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using QuestPDF;
 using QuestPDF.Infrastructure;
 
 namespace Infrastructure;
@@ -28,7 +29,7 @@ public static class DependencyInjection
         services.AddSingleton<TimeProvider>(TimeProvider.System);
         services.AddSingleton<ITaskItemExportXlsx, TaskItemExportXlsx>();
         services.AddSingleton<ITaskItemExportPdf, TaskItemExportPdf>();
-        QuestPDF.Settings.License = LicenseType.Community;
+        Settings.License = LicenseType.Community;
         services.AddSingleton<ITaskItemExportStrategyFactory, TaskItemExportStrategyFactory>();
         services.AddAuth(configuration);
         services.AddPersistence(configuration);
@@ -37,7 +38,7 @@ public static class DependencyInjection
 
         return services;
     }
-    
+
     private static IServiceCollection AddAuth(this IServiceCollection services,
         ConfigurationManager configuration)
     {
@@ -63,7 +64,7 @@ public static class DependencyInjection
 
         return services;
     }
-    
+
     private static IServiceCollection AddPersistence(this IServiceCollection services,
         ConfigurationManager configuration)
     {
@@ -75,7 +76,7 @@ public static class DependencyInjection
 
         return services;
     }
-    
+
     private static IServiceCollection AddEmailSender(this IServiceCollection services,
         ConfigurationManager configuration)
     {
@@ -84,7 +85,7 @@ public static class DependencyInjection
 
         return services;
     }
-    
+
     private static IServiceCollection AddAsyncMessageBus(this IServiceCollection services,
         ConfigurationManager configuration)
     {
