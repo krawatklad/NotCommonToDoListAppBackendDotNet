@@ -1,6 +1,7 @@
 ﻿using Application.Abstractions;
 using Application.Authentication.Commands.Register;
 using Application.Authentication.DTOs;
+using Application.Authentication.Events.UserRegistered;
 using Application.Authentication.Queries.Login;
 using Application.Common;
 using Application.Common.Decorators;
@@ -28,7 +29,10 @@ public static class DependencyInjection
         services.AddScoped<IQueryHandler<FindTaskItemQuery, TaskItem?>, FindTaskItemQueryHandler>();
         services.AddScoped<IQueryHandler<GetTaskItemsQuery, PaginatedList<TaskItem>>, GetTaskItemsQueryHandler>();
         services.AddScoped<IQueryHandler<ExportTaskItemsQuery, ExportedTaskItemsDto>, ExportTaskItemsQueryHandler>();
-        
+
+        services.AddScoped<SendEmailOnUserRegisteredEventHandler>();
+        services.AddScoped<SendSmsOnUserRegisteredEventHandler>();
+
         services.Decorate(typeof(ICommandHandler<,>), typeof(TransactionalCommandHandler<,>));
 
         return services;

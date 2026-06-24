@@ -1,7 +1,9 @@
+using Application.Abstractions;
 using Application.Authentication.Commands.Register;
+using Application.Authentication.Events;
+using Application.Authentication.Events.UserRegistered;
 using Application.Authentication.Interfaces;
 using Application.Common.Exceptions;
-using Application.Common.Interfaces;
 using Application.Common.Persistence;
 using Domain.Entities;
 using Moq;
@@ -12,7 +14,7 @@ public class RegisterCommandHandlerTests
 {
     private readonly Mock<IUserRepository> _userRepositoryMock;
     private readonly Mock<IPasswordHasher> _passwordHasherMock;
-    private readonly Mock<IEmailSender> _emailSenderMock;
+    private readonly Mock<IMessageBus> _messageBusMock;
     private readonly Mock<TimeProvider> _timeProviderMock;
     private readonly RegisterCommandHandler _handler;
 
@@ -20,13 +22,13 @@ public class RegisterCommandHandlerTests
     {
         _userRepositoryMock = new Mock<IUserRepository>();
         _passwordHasherMock = new Mock<IPasswordHasher>();
-        _emailSenderMock = new Mock<IEmailSender>();
+        _messageBusMock = new Mock<IMessageBus>();
         _timeProviderMock = new Mock<TimeProvider>();
         
         _handler = new RegisterCommandHandler(
             _userRepositoryMock.Object,
             _passwordHasherMock.Object,
-            _emailSenderMock.Object,
+            _messageBusMock.Object,
             _timeProviderMock.Object);
     }
 
@@ -52,7 +54,7 @@ public class RegisterCommandHandlerTests
         // Assert
         await Assert.ThrowsAsync<ValidationException>(act);
         _userRepositoryMock.Verify(x => x.AddAsync(It.IsAny<User>(), It.IsAny<CancellationToken>()), Times.Never);
-        _emailSenderMock.Verify(x => x.SendEmailAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()), Times.Never);
+        _messageBusMock.Verify(x => x.PublishAsync(It.IsAny<UserRegisteredEvent>(), It.IsAny<CancellationToken>()), Times.Never);
     }
 
     [Fact]
@@ -84,10 +86,6 @@ public class RegisterCommandHandlerTests
             u.UpdatedAt == now
         ), It.IsAny<CancellationToken>()), Times.Once);
         
-        _emailSenderMock.Verify(x => x.SendEmailAsync(
-            command.Email,
-            "Welcome to our service!",
-            It.Is<string>(s => s.Contains(command.FirstName))
-        ), Times.Once);
+        _messageBusMock.Verify(x => x.PublishAsync(It.IsAny<UserRegisteredEvent>(), It.IsAny<CancellationToken>()), Times.Once);
     }
 }

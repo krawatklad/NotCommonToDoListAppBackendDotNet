@@ -1,9 +1,11 @@
 ﻿using System.Text;
+using Application.Abstractions;
 using Application.Authentication.Interfaces;
 using Application.Common.Configurations;
 using Application.Common.Interfaces;
 using Application.Common.Persistence;
 using Application.TaskItems.Interfaces;
+using EasyNetQ;
 using Infrastructure.Authentication;
 using Infrastructure.Common;
 using Infrastructure.Persistence;
@@ -30,6 +32,7 @@ public static class DependencyInjection
         services.AddSingleton<ITaskItemExportStrategyFactory, TaskItemExportStrategyFactory>();
         services.AddAuth(configuration);
         services.AddPersistence(configuration);
+        services.AddAsyncMessageBus(configuration);
         services.AddEmailSender(configuration);
 
         return services;
@@ -79,6 +82,15 @@ public static class DependencyInjection
         services.Configure<EmailSenderOptions>(configuration.GetSection(key: nameof(EmailSenderOptions)));
         services.AddSingleton<IEmailSender, EmailSender>();
 
+        return services;
+    }
+    
+    private static IServiceCollection AddAsyncMessageBus(this IServiceCollection services,
+        ConfigurationManager configuration)
+    {
+        services.AddEasyNetQ(configuration.GetConnectionString(name: "AsyncBusConnection")).UseSystemTextJson();
+        services.AddSingleton<IMessageBus, RabbitMqBus>();
+        
         return services;
     }
 }
