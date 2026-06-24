@@ -10,4 +10,3 @@ public record TaskItemResponse(
     DateTimeOffset Deadline,
     DateTimeOffset CreatedAt,
     DateTimeOffset UpdatedAt);
-

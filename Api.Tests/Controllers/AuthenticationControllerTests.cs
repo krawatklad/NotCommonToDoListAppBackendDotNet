@@ -48,10 +48,10 @@ public class AuthenticationControllerTests
         Assert.Equal(userId, response.Id);
         _registerHandlerMock.Verify(x => 
             x.Handle(It.Is<RegisterCommand>(c => 
-            c.FirstName == request.FirstName &&
-            c.LastName == request.LastName &&
-            c.Email == request.Email &&
-            c.Password == request.Password), It.IsAny<CancellationToken>()), Times.Once);
+                c.FirstName == request.FirstName &&
+                c.LastName == request.LastName &&
+                c.Email == request.Email &&
+                c.Password == request.Password), It.IsAny<CancellationToken>()), Times.Once);
     }
 
     [Fact]

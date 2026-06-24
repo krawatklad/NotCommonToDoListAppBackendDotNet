@@ -12,7 +12,7 @@ public class UpdateTaskItemCommandHandler(
     public async Task<TaskItem> Handle(UpdateTaskItemCommand command, CancellationToken cancellationToken = default)
     {
         var taskItem = await taskItemRepository.FindByIdAsync(command.TaskItemId, cancellationToken)
-            ?? throw new NotFoundException($"Task item with id {command.TaskItemId} not found.");
+                       ?? throw new NotFoundException($"Task item with id {command.TaskItemId} not found.");
         
         var now = timeProvider.GetUtcNow();
         taskItem.Update(

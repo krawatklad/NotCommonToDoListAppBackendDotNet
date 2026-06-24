@@ -11,7 +11,7 @@ public class DeleteTaskItemCommandHandler(
     public async Task<Unit> Handle(DeleteTaskItemCommand command, CancellationToken cancellationToken = default)
     {
         var taskItem = await taskItemRepository.FindByIdAsync(command.TaskItemId, cancellationToken) 
-            ?? throw new NotFoundException($"Task item with id {command.TaskItemId} not found.");
+                       ?? throw new NotFoundException($"Task item with id {command.TaskItemId} not found.");
         
         if(!taskItem.CreatedById.Equals(command.UserId))
         {
