@@ -9,9 +9,9 @@ namespace Application.Tests.TaskItems.Commands;
 
 public class UpdateTaskItemCommandHandlerTests
 {
+    private readonly UpdateTaskItemCommandHandler _handler;
     private readonly Mock<ITaskItemRepository> _taskItemRepositoryMock;
     private readonly Mock<TimeProvider> _timeProviderMock;
-    private readonly UpdateTaskItemCommandHandler _handler;
 
     public UpdateTaskItemCommandHandlerTests()
     {

@@ -13,9 +13,9 @@ namespace Api.Tests.Controllers;
 
 public class AuthenticationControllerTests
 {
-    private readonly Mock<ICommandHandler<RegisterCommand, Guid>> _registerHandlerMock;
-    private readonly Mock<IQueryHandler<LoginQuery, LoginResult>> _loginQueryMock;
     private readonly AuthenticationController _controller;
+    private readonly Mock<IQueryHandler<LoginQuery, LoginResult>> _loginQueryMock;
+    private readonly Mock<ICommandHandler<RegisterCommand, Guid>> _registerHandlerMock;
 
     public AuthenticationControllerTests()
     {

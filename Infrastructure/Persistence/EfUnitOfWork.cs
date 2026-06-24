@@ -6,7 +6,7 @@ namespace Infrastructure.Persistence;
 public class EfUnitOfWork(AppDbContext dbContext) : IUnitOfWork
 {
     private IDbContextTransaction? _transaction;
-    
+
     public async Task BeginTransactionAsync(CancellationToken cancellationToken)
     {
         if (_transaction is not null)

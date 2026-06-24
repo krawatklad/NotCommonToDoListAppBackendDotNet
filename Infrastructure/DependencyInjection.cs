@@ -38,7 +38,7 @@ public static class DependencyInjection
 
         return services;
     }
-    
+
     private static IServiceCollection AddAuth(this IServiceCollection services,
         ConfigurationManager configuration)
     {
@@ -64,7 +64,7 @@ public static class DependencyInjection
 
         return services;
     }
-    
+
     private static IServiceCollection AddPersistence(this IServiceCollection services,
         ConfigurationManager configuration)
     {
@@ -76,7 +76,7 @@ public static class DependencyInjection
 
         return services;
     }
-    
+
     private static IServiceCollection AddEmailSender(this IServiceCollection services,
         ConfigurationManager configuration)
     {
@@ -85,7 +85,7 @@ public static class DependencyInjection
 
         return services;
     }
-    
+
     private static IServiceCollection AddAsyncMessageBus(this IServiceCollection services,
         ConfigurationManager configuration)
     {

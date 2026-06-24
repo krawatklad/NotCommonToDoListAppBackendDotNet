@@ -11,11 +11,11 @@ namespace Application.Tests.Authentication;
 
 public class RegisterCommandHandlerTests
 {
-    private readonly Mock<IUserRepository> _userRepositoryMock;
-    private readonly Mock<IPasswordHasher> _passwordHasherMock;
-    private readonly Mock<IMessageBus> _messageBusMock;
-    private readonly Mock<TimeProvider> _timeProviderMock;
     private readonly RegisterCommandHandler _handler;
+    private readonly Mock<IMessageBus> _messageBusMock;
+    private readonly Mock<IPasswordHasher> _passwordHasherMock;
+    private readonly Mock<TimeProvider> _timeProviderMock;
+    private readonly Mock<IUserRepository> _userRepositoryMock;
 
     public RegisterCommandHandlerTests()
     {

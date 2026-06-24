@@ -5,22 +5,6 @@ namespace Api.Common.Exceptions;
 
 internal sealed class ProblemDetailsFactory : IProblemDetailsFactory
 {
-    public ProblemDetails Create(Exception exception)
-    {
-        if (Map.TryGetValue(exception.GetType(), out var factory))
-        {
-            return factory(exception);
-        }
-
-        return new ProblemDetails
-        {
-            Title = "Internal Server Error",
-            Status = StatusCodes.Status500InternalServerError,
-            Detail = exception.Message,
-            Type = exception.GetType().Name
-        };
-    }
-    
     private static readonly Dictionary<Type, Func<Exception, ProblemDetails>> Map
         = new()
         {
@@ -52,4 +36,20 @@ internal sealed class ProblemDetailsFactory : IProblemDetailsFactory
                 }
             }
         };
+
+    public ProblemDetails Create(Exception exception)
+    {
+        if (Map.TryGetValue(exception.GetType(), out var factory))
+        {
+            return factory(exception);
+        }
+
+        return new ProblemDetails
+        {
+            Title = "Internal Server Error",
+            Status = StatusCodes.Status500InternalServerError,
+            Detail = exception.Message,
+            Type = exception.GetType().Name
+        };
+    }
 }
